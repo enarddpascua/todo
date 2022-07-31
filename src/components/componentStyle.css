@@ -1,0 +1,204 @@
+.parent-wrapper{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.navigation-base{
+    background-color: aliceblue;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 2px;
+    border: .5px solid black;
+}
+
+.navigation-base > h1{
+    color: #282c34;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.todo-base{
+    background-color: aliceblue;
+    height: 50vh;
+    width: 100%;
+    overflow-y: scroll;
+
+}
+
+.todo-base > ul{
+    color: black;
+}
+
+.todo-base > ul > li > button{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    padding: .3rem;
+    border-radius: 2px;   
+}
+
+.delete:hover{
+    background-color: #b14a4a;
+    color: rgb(255, 255, 255);
+    /* margin-left: .5rem; */
+}
+
+.done:hover{
+    background-color: #169558;
+    color: rgb(254, 254, 254);
+}
+
+.edit:hover{
+    background-color: #958016;
+    color: rgb(254, 254, 254);
+}
+
+.button-base{
+    height: 60%;
+    width: 30%;
+   
+}
+
+.button-base >button{
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    color: black;
+    cursor: pointer;
+}
+
+.input-base{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-base > form{
+   width: 80%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.input-base >form> input{
+    border-radius: 3px;
+    height: 2rem;
+    width: 80%;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 25px;
+    margin-top: .5rem;
+}
+
+.form-btn-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+    padding: .5rem;
+}
+
+.form-btn-wrapper > button{
+ border-radius: 3px;   
+ cursor: pointer;
+ border: none;
+ color: white;
+ text-decoration: none;
+ font-size: 20px;
+ display: flex;
+ align-items: center;
+ padding: .5rem;
+}
+
+.form-btn-wrapper > button::after{
+    font-family:monospace;
+}
+
+.add-todo-btn{
+    background-color: #4CAF50; /* Green */ 
+}
+
+.add-todo-btn::after{
+    content: 'Add todo';
+}
+
+.add-todo-btn:hover{
+    background-color: #2b862e; 
+}
+
+.save-btn{
+    background-color: #4c86af;
+}
+
+.save-btn::after{
+    content: 'Save';
+}
+
+.save-btn:hover{
+    background-color: #295b7e; 
+}
+
+.clear-btn{
+    background-color: #af4c4c;
+}
+
+.clear-btn::after{
+    content: 'Clear';
+}
+
+.clear-btn:hover{
+    background-color: #721e1e;
+}
+
+@media screen and (max-width: 750px) {
+
+    .form-btn-wrapper > button{
+        width: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       }
+
+    .todo-base > ul{
+        font-size: xx-large;
+    }
+
+    .todo-base > ul > li > button{
+        font-size: x-large;
+    }
+
+    .delete{
+        background-color: #b14a4a;
+    }
+    
+    .done{
+        background-color: #169558;
+    }
+    
+    .add-todo-btn::after{
+        content: '';
+    }
+
+    .save-btn::after{
+        content: '';
+    }
+
+    .clear-btn::after{
+        content: '';
+    }
+
+}
+
+@media screen and (max-height: 500px){
+    .navigation-base{
+        display: none;
+    }
+}
