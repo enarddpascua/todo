@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 80%;
+    position: relative;
 }
 
 .navigation-base{
@@ -31,7 +32,13 @@
 }
 
 .todo-base > ul{
-    color: black;
+    color: #000000;
+    list-style:none;
+}
+
+.completed{
+    text-decoration: line-through;
+    color: rgba(0, 0, 0, 0.372);
 }
 
 .todo-base > ul > li > button{
@@ -56,6 +63,10 @@
 .edit:hover{
     background-color: #958016;
     color: rgb(254, 254, 254);
+}
+
+.edit:disabled{
+   pointer-events: none;
 }
 
 .button-base{
@@ -158,6 +169,88 @@
     background-color: #721e1e;
 }
 
+.modal-parent{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(67, 67, 67,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-child{
+    background-color: rgb(255, 255, 255);
+    height: 30%;
+    width: 75%;
+    border-radius: 3px;
+}
+
+.modal-content-wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-wrapper >form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    height: 70%;
+    justify-content: space-around;
+}
+
+.modal-content-wrapper >form> input{
+    border-radius: 3px;
+    text-decoration: none;
+    height: 1.5rem;
+    font-size: 1rem;
+ }
+
+ .edit-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+ }
+
+ .edit-button-wrapper > button{
+    border-radius: 3px;   
+    cursor: pointer;
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    margin-left: 0.5rem
+ }
+
+ .submit-edit-button{
+    background-color: #4CAF50;
+ }
+
+ .submit-edit-button::after{
+    content: 'Submit';
+ }
+
+ .submit-edit-button:hover{
+    background-color: #207823;
+ }
+
+ .cancel-edit-button{
+    background-color: #af4c4c;
+ }
+
+ .cancel-edit-button::after{
+    content: 'Cancel';
+ }
+
+ .cancel-edit-button:hover{
+    background-color: #651a1a;
+ }
+
 @media screen and (max-width: 750px) {
 
     .form-btn-wrapper > button{
@@ -202,3 +295,5 @@
         display: none;
     }
 }
+
+
