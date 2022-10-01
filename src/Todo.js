@@ -5,17 +5,25 @@ import TodoBase from './components/TodoBase';
 import {FaTrashAlt, FaCheckSquare, FaEdit} from 'react-icons/fa';
 import {AiOutlineCheck} from 'react-icons/ai';
 import {ImCancelCircle} from 'react-icons/im';
+import {BiErrorCircle} from 'react-icons/bi';
+import {TbFidgetSpinner} from 'react-icons/tb';
+import {VscSmiley} from 'react-icons/vsc';
 import Modal from './components/Modal';
 
 const Todo = () => {
     const [todos, setTodos] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [editTodo, setEditTodo] = useState({todo:{}, index:0});
+    const [isLoading, setIsLoading] = useState(false);
+    const [isErr, setIsErr] = useState(false);
     const inputRef = useRef(null);
+    // const url = "http://localhost:8080/todos";
+    const url = "https://enard-simple-todoapp.herokuapp.com/todos";
 
     const addTodos = (e) => {
         e.preventDefault();
-        setTodos([...todos,{todo: e.target[0].value, done:false}]);
+        setTodos([...todos,{todo: e.target[0].value, done:false, id: todos.length > 0 ?todos[todos.length - 1].id + 1 :
+        todos.length + 1 }]);
         inputRef.current.value = "";
     }
 
@@ -64,8 +72,32 @@ const Todo = () => {
     }
 
     const saveTodos = () => {
-        console.log(todos);
+        console.log(todos)
+        const reqBody = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(todos)
+        };
+        fetch(url, reqBody).then(res => {
+            console.log(res.status);
+        })
+
     }
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(url).then(response =>{
+            if(response.ok){
+                return response.json()
+            }
+            throw response;
+        }).then(data => {
+            setTodos(data);
+        }).catch(err => {
+            setIsErr(true);
+        });
+        setIsLoading(false);
+    },[])
 
     return(
         <div className='parent-wrapper'>
@@ -82,7 +114,7 @@ const Todo = () => {
                <ul>
                 {todos.map((v,i) => {
                     return(
-                        <li key={i} className={ v.done ? 'completed':''}>
+                        <li key={v.id} className={ v.done ? 'completed':''}>
                             {v.todo}
                             <button className='delete' onClick={() => deleteTodos(i)}><FaTrashAlt/></button>
                             <button disabled={v.done} className='edit' onClick={(e) => editTodos(e,v, i)}><FaEdit/></button>
@@ -91,6 +123,20 @@ const Todo = () => {
                     )
                 })}
                </ul>
+               {isErr && (
+                <div className='status-indication'><BiErrorCircle/> Error getting your tasks</div>
+                )}
+                {isLoading && (
+                    <div className='status-indication'>
+                        <div className='spinner'><TbFidgetSpinner size={100}/></div>
+                    </div>
+                )}
+                {todos.length === 0 && (
+                    <div className='status-indication'>
+                        <div className='spinner nothing'> <VscSmiley size={100}/></div>
+                        There's nothing to do here...
+                    </div>
+                )}
             </TodoBase>
             {showModal  && ( 
             <Modal>
@@ -111,6 +157,7 @@ const Todo = () => {
                 </div>
             </Modal>
             )}
+            
         </div>
     );
 }
