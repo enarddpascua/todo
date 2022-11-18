@@ -94,7 +94,7 @@ const Todo = () => {
         }).catch(err => {
             setIsErr(true);
         });
-        setIsLoading(true);
+        setIsLoading(false);
     },[])
 
     return(
