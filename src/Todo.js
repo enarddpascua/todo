@@ -122,7 +122,7 @@ const Todo = () => {
                 })}
                </ul>
                {isErr && (
-                <div className='status-indication'><BiErrorCircle/> Error getting your tasks</div>
+                <div className='status-indication'><BiErrorCircle/>Error</div>
                 )}
                 {isLoading && (
                     <div className='status-indication'>
@@ -132,7 +132,7 @@ const Todo = () => {
                 )}
                 {(todos.length === 0 && !isLoading && !isErr)  && (
                     <div className='status-indication'>
-                        There's nothing to do here...
+                        There's nothing to do here
                     </div>
                 )}
             </TodoBase>
