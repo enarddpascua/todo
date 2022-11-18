@@ -7,7 +7,6 @@ import {AiOutlineCheck} from 'react-icons/ai';
 import {ImCancelCircle} from 'react-icons/im';
 import {BiErrorCircle} from 'react-icons/bi';
 import {TbFidgetSpinner} from 'react-icons/tb';
-import {VscSmiley} from 'react-icons/vsc';
 import Modal from './components/Modal';
 
 const Todo = () => {
@@ -72,7 +71,6 @@ const Todo = () => {
     }
 
     const saveTodos = () => {
-        console.log(todos)
         const reqBody = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -96,7 +94,7 @@ const Todo = () => {
         }).catch(err => {
             setIsErr(true);
         });
-        setIsLoading(false);
+        setIsLoading(true);
     },[])
 
     return(
@@ -129,11 +127,11 @@ const Todo = () => {
                 {isLoading && (
                     <div className='status-indication'>
                         <div className='spinner'><TbFidgetSpinner size={100}/></div>
+                        Getting your tasks...
                     </div>
                 )}
-                {todos.length === 0 && (
+                {(todos.length === 0 && !isLoading && !isErr)  && (
                     <div className='status-indication'>
-                        <div className='spinner nothing'> <VscSmiley size={100}/></div>
                         There's nothing to do here...
                     </div>
                 )}
